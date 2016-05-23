@@ -6,6 +6,7 @@ SECRETKEY = "secretkey"
 user = "username"
 playlist = "/home/" + user + "/Music/Playlists/favorites.pls"
 socket = "/home/" + user + "/.cmus/socket"
+seskeyp = "/home/" + user + "/tmp/cmus/seskey"
 timeout = 10
 
 URL = "http://ws.audioscrobbler.com/2.0/"
@@ -66,9 +67,9 @@ def getapisig(token):
     return h.hexdigest()
 
 def getseskey():
-    if path.isfile('seskey'):
+    if path.isfile(seskeyp):
         print "Already have a session key"
-        seskeyf = open('seskey', 'r')
+        seskeyf = open(seskeyp, 'r')
         seskey = seskeyf.read()
     else:
         print "Generate new session key"
@@ -83,7 +84,7 @@ def getseskey():
         response = urllib2.urlopen(sesrequrl)
         jsondata = json.load(response)
         seskey = jsondata["session"]["key"]
-        seskeyf = open('seskey', 'w')
+        seskeyf = open(seskeyp, 'w')
         seskeyf.write(seskey)
     seskeyf.close()
     return seskey

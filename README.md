@@ -37,6 +37,10 @@ user = "username"
 ```
 playlist = "/path/to/favorites.pls"
 ```
+##### set where to save session key
+```
+seskeyp = "/path/to/seskey"
+```
 ##### create last.fm API account and generate keys
 For now, to be able to send track love to last.fm, a specific API account should be generated for embedding the script with personal api and secret keys:  
 ```
