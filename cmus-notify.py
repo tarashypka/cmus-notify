@@ -89,10 +89,19 @@ def getseskey():
     seskeyf.close()
     return seskey
 
+def exists(favorite):
+    favorites = [ line.strip('\n') for line in open(playlist) ]
+    if favorite in favorites:
+        return True
+    return False
+
 def favorite(n, action):
     assert action == "favorite"
     if not n.show():
         exit(1)
+    fav = grep(cmuscall("status"), "file ")[5:]
+    if exists(fav):
+        return
     cmuscall("view 3")
     cmuscall("load " + playlist)
     cmuscall("view 1")
